@@ -1,8 +1,6 @@
 import pandas as pd
 
-# -------------------------------
-# LOAD DATASET
-# -------------------------------
+
 df = pd.read_csv("movies.csv")
 
 # Keep required columns
@@ -15,16 +13,16 @@ df['genres'] = df['genres'].fillna('')
 # Normalize genres
 df['genres_lower'] = df['genres'].str.lower()
 
-# -------------------------------
+
 # MULTI-GENRE RECOMMENDATION
-# -------------------------------
+
 def recommend_by_genres(user_input, top_n=10):
     # Normalize input
     user_input = user_input.lower().replace('|', ',')
     selected_genres = [g.strip() for g in user_input.split(',') if g.strip()]
 
     if not selected_genres:
-        print("❌ Please enter at least one genre.")
+        print("Please enter at least one genre.")
         return
 
     # Filter movies that contain ALL selected genres
@@ -36,7 +34,7 @@ def recommend_by_genres(user_input, top_n=10):
         ]
 
     if filtered_movies.empty:
-        print("❌ No movies found matching all selected genres.")
+        print("No movies found matching all selected genres.")
         return
 
     # Sort by rating
@@ -53,7 +51,7 @@ def recommend_by_genres(user_input, top_n=10):
 # USER INPUT LOOP
 # -------------------------------
 if __name__ == "__main__":
-    print("🎥 AI Multi-Genre Movie & Web Series Recommendation System")
+    print("AI Multi-Genre Movie & Web Series Recommendation System")
     print("--------------------------------------------------------")
     print("Enter one or more genres (Action, Sci-Fi, Drama etc.)")
     print("Type 'exit' to quit\n")
@@ -62,8 +60,9 @@ if __name__ == "__main__":
         user_genres = input("Enter preferred genre(s): ")
 
         if user_genres.lower() == "exit":
-            print("👋 Thank you for using the recommendation system!")
+            print("Thank you for using the recommendation system!")
             break
 
         recommend_by_genres(user_genres)
         print("\n" + "-" * 50 + "\n")
+
